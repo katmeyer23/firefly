@@ -1,0 +1,424 @@
+.event-calendar
+  .cal_navigation 
+  	display flex
+  	justify-content space-between
+  	margin-bottom 10px
+  	button 
+  		margin 0
+  		padding 0
+  		font-size 15px
+  		font-weight 700
+  		color {{ attr.linkColor }}
+  		text-decoration none
+  		background none
+  		border none
+  		cursor pointer
+  .calendar_block 
+  	margin 0
+  	padding 0
+  	border 1px solid #bbb
+  	.grid
+  	  position relative
+  	  background {{theme.secondaryColor}}
+  	.dropdown
+      position absolute
+      display inline-block
+      top 50%
+      right 20px
+      transform translate(0%,-50%)
+      z-index 9
+      .item
+        margin 0
+        padding 5px 10px
+        font-size 14px
+        color #fff
+        margin 0
+        padding 5px 10px
+        font-size 14px
+        cursor pointer
+        &:after
+          display inline-block
+          margin-left .255em
+          vertical-align .255em
+          content ""
+          border-top .3em solid
+          border-right .3em solid transparent
+          border-bottom 0
+          border-left .3em solid transparent
+      .dropdown-content
+        display none
+        position absolute
+        top 99%
+        right 0
+        box-shadow 0 0.5rem 1rem rgba(0,0,0,0.15)
+        border-radius 5px
+        border 1px solid #dadce0
+        background #fff
+        z-index 5
+        min-width 130px
+        .drop-item
+          padding 8px 20px
+          font-size 14px
+          color #202124
+          display block
+          white-space nowrap
+          cursor pointer
+          &:hover
+            background-color #f1f1f1
+            color #202124            
+      &:hover
+        .item
+          color #fff          
+        .dropdown-content
+          display block          
+  	.cale_title 
+  		margin 0
+  		padding 20px
+  		text-align center
+  		background {{ attr.headerColor }}
+  		font-size 30px
+  		color #fff
+  		img
+        height 25px
+  	.table_calendar 
+  		width 100%
+  		margin 0
+  		padding 0
+  		background #fff
+  		thead 
+  			th 
+  				width 14.22%
+  				margin 0
+  				padding 16px 5px
+  				background darken({{ attr.headerColor }}, 10%)
+  				font-size 14px
+  				color #fff
+  				font-weight 700
+  				text-transform uppercase
+  				display table-cell
+  				&.shortDays
+  				  display none
+  		tbody
+  		  position relative
+  		  &.loading
+    		  &:after
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
+            background-color #00000026
+            background-image url("/loader.gif")
+            background-position top
+            background-repeat no-repeat
+            background-size 50px 50px
+            content ""
+  			tr 
+  				&:first-child 
+  					td 
+  						border-top none
+  			td 
+  				height 145px
+  				margin 0
+  				padding 0 0 5px
+  				border 1px solid #d2d2d2
+  				border-left none
+  				border-bottom none
+  				vertical-align top
+  				&:last-child 
+  					border-right none
+  				.date 
+  					margin 0 0 10px 0
+  					padding 3px 14px
+  					display block
+  					text-align right
+  					color {{ attr.dateColor }}
+  					font-size 20px
+  					font-weight 700
+  				.event_status 
+  					margin 0 0 5px 0
+  					padding 0 14px
+  					font-size 12px
+  					color #000
+  				&:not(.disable):not(.active):hover 
+  					background #f7f7f7
+  					box-shadow 0 0 10px rgba(0, 0, 0, 0.2)
+  				&.disable 
+  					background #f9f9f9
+  					.date 
+  						background #dddddd
+  						color #b0b0b0
+  				&.today 
+  					.date 
+  						background {{ attr.startDateBackgroundColor }}
+  						color #fff
+  				ul
+            &.event_list 
+              margin 0
+              padding 0 14px
+              li 
+                margin 0
+                padding 5px 0
+                display block
+                border-bottom 1px solid #e0e0e0
+                list-style none
+                position relative
+                
+                // Existing styles
+                &:last-child 
+                  border-bottom none
+                .event_title 
+                  margin 0
+                  padding 0
+                  font-size 12px
+                  color {{ attr.linkColor }}
+                  
+                // Add this block for hover
+                &.is-hovered 
+                  .event_cap
+                    display block
+                    pointer-events auto
+          
+                .event_cap 
+                  width 100%
+                  min-width 400px
+                  margin 0
+                  padding 15px
+                  display none
+                  background #fff
+                  box-shadow 3px 4px 21px rgba(0, 0, 0, 0.38)
+                  position absolute
+                  top 100%
+                  left 0
+                  z-index 1
+                  pointer-events auto
+                
+                  // Add this block for visible
+                  &.is-visible
+                    display block
+                    pointer-events auto
+                
+                  // Add these blocks for position control
+                  &.is-up
+                    top auto
+                    bottom 100%
+                    &:before
+                      top auto
+                      bottom -20px
+                      border-bottom-color transparent
+                      border-top-color #fff
+                
+                  &.is-down
+                    top 100%
+                    bottom auto
+                
+                  // Existing styles
+                  &:before 
+                    border 10px solid transparent
+                    border-bottom-color #fff
+                    content " "
+                    display block
+                    height 0
+                    left 17px
+                    position absolute
+                    top -20px
+                    width 0
+                    z-index 2
+                  h3 
+                    margin 0 0 10px 0
+                    padding 0
+                    font-size 20px
+                  .evnt_full_date 
+                    margin 0 0 10px 0
+                    padding 0
+                    font-size 10px
+                    display block
+                  .description 
+                    margin 0
+                    padding 0
+                    display flex
+                    align-items flex-start
+                    img 
+                      float left
+                      margin-right 12px
+                      width 40%
+                      height auto
+                      flex-shrink 0
+                    .description_detail
+                      flex 1
+                      overflow hidden
+
+
+  .event_detail_mob 
+    margin 0
+    padding 10px 0
+    display none
+    .date_title 
+      margin 0 0 10px
+      padding 0
+      font-size 16px
+      font-weight 700
+      color #222
+    .ev_hour 
+      margin-bottom 1.5rem
+      font-size 17px
+    .event_items
+      margin 0 0 20px
+      padding 0
+      .event_item 
+        margin 0
+        padding 16px 0 0
+        border-top 1px dotted #2f2f2f
+        &:first-child 
+          border-top none
+          padding-top 0 
+				h4 
+          margin 0 0 10px
+          padding 0
+          font-size 1.25em
+          font-weight 900
+          a
+            color black
+        .event_block 
+          margin 0
+          padding 0
+          display inline-block
+          width 100%
+          figure 
+            flex 0 0 150px
+            width 150px
+            float left
+            margin 0 15px 0 0
+            padding 0
+            img 
+              width 100%
+              height auto
+          .right_detail 
+            margin 0
+            padding 0 0 15px 0
+            display inline
+            p 
+              margin 0
+              padding 0
+              font-size 17px
+              color #222
+              .date
+                display block
+                font-weight bold
+                font-size 12px
+            .find_more 
+              margin 18px 0 15px
+              color {{ attr.linkColor }}
+              display inline-block
+@media (max-width: 1579px)
+  .event-calendar
+    .calendar_block
+      .table_calendar
+        td
+          &:nth-child(6), &:nth-child(7)
+            ul
+              &.event_list
+                li
+                  .event_cap
+                    right 0
+                    left auto
+                    &:before
+                      left auto
+                      right 17px
+@media (max-width: 768px)
+  .event-calendar
+    .cal_navigation
+      margin-bottom 15px
+      gap 2px
+      button
+        color #fff
+        background {{ attr.headerColor }}
+        width 100%
+        padding 10px
+        text-align left
+        &:last-child
+          text-align right
+    .calendar_block
+      .cale_title
+        padding 15px 10px 10px
+      .table_calendar
+        thead
+          th
+            padding 8px 5px
+            &.longDays
+              display none
+            &.shortDays
+              display table-cell
+        tbody
+          td
+            height 45px
+            position relative
+            &:before
+              content ""
+              width 8px
+              height 8px
+              background #999
+              border-radius 50%
+              position absolute
+              bottom 7px
+              left 50%
+              transform translate(-50%,0%)
+            .date
+              margin 0
+              padding 0
+              text-align center
+            .event_status
+              display none
+            &.hasEvents
+              &:before
+                background #d09b99
+            &.today
+              background #dedede
+              .date
+                color #fff
+                background #dedede                
+              &:before
+                background #fff
+            &.active
+              background #d7635e
+              .date
+                color #fff
+                background #d7635e
+              &:before
+                background #fff
+            ul
+              &.event_list
+                display none
+    .event_detail_mob
+      display block
+
+@media (max-width: 599px)
+  .event-calendar
+    .calendar_block
+      .dropdown
+        position relative
+        display block
+        top 0
+        right 0
+        transform inherit
+        z-index 9
+        text-align center
+        .dropdown-content
+          right auto
+          left 50%
+          transform translate(-50%,0%)
+    .event_detail_mob
+      .ev_hour
+        font-size 14px
+      .date_title
+        font-size 14px
+      .event_items
+        .event_item
+          .event_block
+            figure
+              width 100px
+              margin 0 10px 0 0
+            p
+              font-size 14px
+          h4
+            font-size 18px

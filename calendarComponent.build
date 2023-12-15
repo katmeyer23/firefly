@@ -1,0 +1,37 @@
+if(typeof eventsCalendarList !== "undefined") {
+addAsset('component/event-list/event_index.json', {
+  events: eventsCalendarList.filter(event => ((event.eventEndDate) ? event.eventEndDate : event.eventStartDate) >= event.eventStartDate ).map(event => {
+    
+    /* Get Image Details */
+    let mediaDetail = mediaList.find(media => media._id == event.eventImage)
+    var imageDetail = {}
+    
+    if(mediaDetail) {
+      
+      let sizes = mediaDetail.sizes.filter(size => size.width <= 300)
+      if (!sizes.length) sizes = mediaDetail.sizes.slice(-1)
+      
+      imageDetail = {
+        alt: mediaDetail.altText || mediaDetail.name,
+        srcset: sizes.map(size => `/media/${size.path} ${size.width}w`).join(', '),    
+        src: `/media/${sizes[0].path}`,
+        sizes: sizes.slice().reverse().map(size => `(max-width:${size.width}px) ${size.width}px`).concat([`${sizes[0].width}px`]).join(', '),
+        height: sizes[0].height,
+        width: sizes[0].width    
+      }
+    }
+    
+    /* Return Event Data */
+    return {
+      eventName: event.eventTitle,
+      startDate: event.eventStartDate,
+      endDate: (event.eventEndDate) ? event.eventEndDate : event.eventStartDate,
+      description: event.eventDescriptionHtml,
+      image: event.eventImage,
+      category: event.eventCategory || "",
+      _createdAtDate: event._createdAtDate,
+      imageDetail: imageDetail
+    }
+  }).filter(Boolean)
+})
+}
